@@ -1,18 +1,11 @@
 /* Users */
-export const GET_ALL_USERS = "GET_ALL_USERS";
-export const SUCCESS_GET_ALL_USERS = "SUCCESS_GET_ALL_USERS";
-export const FAIL_GET_ALL_USERS = "FAIL_GET_ALL_USERS";
+export const GET_ALL_USERS_INIT = "GET_ALL_USERS_INIT";
+export const GET_ALL_USERS_SUCCESS = "GET_ALL_USERS_SUCCESS";
 
-export const getAllUsers = () => ({
-  type: GET_ALL_USERS
-});
+/* Errors */
+export const SET_NEW_ERROR = "SET_NEW_ERROR";
+export const RESET_ERROR = "RESET_ERROR";
 
-export const successGetAllUsers = payload => ({
-  type: SUCCESS_GET_ALL_USERS,
-  payload
-});
-
-export const failGetAllUsers = payload => ({
-  type: FAIL_GET_ALL_USERS,
-  payload
+export const fetchGetAllUsers = () => ({
+  type: GET_ALL_USERS_INIT
 });

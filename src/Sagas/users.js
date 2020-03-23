@@ -6,9 +6,9 @@ import { put, call, takeLatest } from "redux-saga/effects";
 
 /* Actions */
 import {
-  GET_ALL_USERS,
-  SUCCESS_GET_ALL_USERS,
-  FAIL_GET_ALL_USERS
+  GET_ALL_USERS_INIT,
+  GET_ALL_USERS_SUCCESS,
+  SET_NEW_ERROR
 } from "../Redux/Actions";
 
 /* Api */
@@ -16,22 +16,22 @@ import apiCall from "../Api";
 
 export function* getAllUsers() {
   try {
-    const result = yield call(apiCall, API_URL + USERS_ENDPOINT, GET_METHOD);
-    if (result) yield put({ type: SUCCESS_GET_ALL_USERS, result });
-    else
-      yield put({
-        type: FAIL_GET_ALL_USERS,
-        errorMsg: "No se obtuvieron datos de la petición."
-      });
+    const payload = yield call(apiCall, API_URL + USERS_ENDPOINT, GET_METHOD);
+
+    if (payload.error) {
+      yield put({ type: SET_NEW_ERROR, errorMsg: payload.errorMsg });
+    } else {
+      yield put({ type: GET_ALL_USERS_SUCCESS, payload });
+    }
   } catch (error) {
     yield put({
-      type: FAIL_GET_ALL_USERS,
-      errorMsg: "Hubo un error al realizar la petición."
+      type: SET_NEW_ERROR,
+      errorMsg: "Hubo un problema al realizar la petición."
     });
   }
 }
 
 //Watchers
 export default function* users() {
-  yield takeLatest(GET_ALL_USERS, getAllUsers);
+  yield takeLatest(GET_ALL_USERS_INIT, getAllUsers);
 }

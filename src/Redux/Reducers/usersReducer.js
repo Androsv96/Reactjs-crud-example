@@ -1,26 +1,24 @@
-import { SUCCESS_GET_ALL_USERS, FAIL_GET_ALL_USERS } from "../Actions";
+import { GET_ALL_USERS_INIT, GET_ALL_USERS_SUCCESS } from "../Actions";
 
 const initialState = {
-  users: [],
-  shouldFetchUsers: true,
-  failGetAllUserMsg: ""
+  usersData: [],
+  shouldFetchUsers: true
 };
 
 export default function UsersReducer(state = initialState, action) {
   switch (action.type) {
-    case SUCCESS_GET_ALL_USERS:
+    case GET_ALL_USERS_INIT:
       return (state = {
         ...state,
-        users: action.result,
-        shouldFetchUsers: false,
-        failGetAllUserMsg: ""
+        usersData: [],
+        shouldFetchUsers: false
       });
 
-    case FAIL_GET_ALL_USERS:
+    case GET_ALL_USERS_SUCCESS:
       return (state = {
         ...state,
-        shouldFetchUsers: false,
-        failGetAllUserMsg: action.errorMsg
+        usersData: action.payload.data,
+        shouldFetchUsers: false
       });
 
     default:
