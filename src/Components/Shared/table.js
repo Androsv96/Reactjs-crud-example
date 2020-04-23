@@ -21,7 +21,14 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
-export default function MyTable({ style, columns, data, title, options }) {
+export default function MyTable({
+  style,
+  columns,
+  data,
+  title,
+  options,
+  editable
+}) {
   return (
     <MaterialTable
       style={style}
@@ -30,6 +37,7 @@ export default function MyTable({ style, columns, data, title, options }) {
       title={title}
       icons={TABLE_ICONS}
       options={options}
+      editable={editable}
     />
   );
 }
